@@ -67,7 +67,7 @@ if __name__ == '__main__':
 
     print(f"area = {area}")
 
-    print_image(image)
+    #print_image(image)
 
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
