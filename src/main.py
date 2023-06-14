@@ -1,4 +1,3 @@
-#import cv2
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
@@ -30,7 +29,6 @@ def processing(file):
 
     #thresh = cv2.erode(thresh, kernel, iterations=1)#тоньше
     thresh = cv2.dilate(thresh, kernel, iterations=1)#тольще
-    print_image(thresh)
     return contur(image,thresh)
     pass
 
