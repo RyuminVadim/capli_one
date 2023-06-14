@@ -22,20 +22,24 @@ def pre_processing(file, val):
         x, y = image.shape
         median = cv2.GaussianBlur(image, (11, 11), 0)
         median1 = cv2.GaussianBlur(image, (21, 21), 0)
-        a = median1 - median
+        a = median-median1
         thresh = 255 - a
+        thresh = inversion(thresh)
+        _,thresh= cv2.threshold(thresh,127,255,cv2.THRESH_BINARY)
     if (val == 1):
         thresh = cv2.adaptiveThreshold(image,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY,11,2)
+        thresh = inversion(thresh)
     return image_color,thresh
+
 def processing(file):
-    image, thresh = pre_processing(file, 1)
-    thresh = inversion(thresh)
+    image, thresh = pre_processing(file, 0)
 
-    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
-    thresh = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, kernel, iterations=1)
+    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (4, 4))
+    thresh = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, kernel, iterations=2)
+
     #thresh = cv2.erode(thresh, kernel, iterations=1)#тоньше
-    thresh = cv2.dilate(thresh, kernel, iterations=2)#тольще
-
+    thresh = cv2.dilate(thresh, kernel, iterations=1)#тольще
+    print_image(thresh)
     return contur(image,thresh)
     pass
 
@@ -55,19 +59,17 @@ def contur(image,thresh):
                 cv2.drawContours(image, contours, u, (255, 1, 255), 3)
     return image,area
 
-def print_image(image):
-    #fig, ax = plt.subplots(1, 1)
-    #ax[0].imshow(image)
-    #ax[1].imshow(thresh1)
-    #plt.show()
-    cv2.imshow('image', image)
-    cv2.waitKey(0)
-
-
+def print_image(image,val=0):
+    if(val == 0):
+        cv2.imshow('image', image)
+        cv2.waitKey(0)
+    if (val == 1):
+        imgplot = plt.imshow(image)
+        plt.show()
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    file = './image/test.png'
-    #file = './image/1.jpg'
+    #file = './image/test.png'
+    file = './image/1.jpg'
 
 
     image,area = processing(file)
