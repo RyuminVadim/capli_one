@@ -3,15 +3,6 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-def add_numbers(x, y):
-    return x + y
-
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
 def inversion(thresh):
     return cv2.bitwise_not(thresh)
 def pre_processing(file, val):
