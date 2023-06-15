@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 def inversion(thresh):
     return cv2.bitwise_not(thresh)
 def pre_processing(file, val):
-    image_color = cv2.imread(file,cv2.IMREAD_UNCHANGED)
+    #image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     image = cv2.imread(file,0)
     #print(image)
     if(val == 0):
@@ -19,10 +19,10 @@ def pre_processing(file, val):
     if (val == 1):
         thresh = cv2.adaptiveThreshold(image,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY,11,2)
         thresh = inversion(thresh)
-    return image_color,thresh
+    return image,thresh
 
 def processing(file):
-    image, thresh = pre_processing(file, 0)
+    image,thresh = pre_processing(file, 0)
 
     kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (4, 4))
     thresh = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, kernel, iterations=2)
@@ -58,8 +58,10 @@ def print_image(image,val=0):
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     #file = './image/test.png'
-    file = './image/1.jpg'
+    file = '../image/1.jpg'
 
+    print((file))
+    #print_image(image)
 
     image,area = processing(file)
 
