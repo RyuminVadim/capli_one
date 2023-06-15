@@ -1,3 +1,5 @@
 /.idea
 /.github
 /image
+/src/.pytest_cache
+help.txt
