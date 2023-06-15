@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 def inversion(thresh):
     return cv2.bitwise_not(thresh)
 def pre_processing(file, val):
-    #image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    image_collor = cv2.imread(file,1)
     image = cv2.imread(file,0)
     #print(image)
     if(val == 0):
@@ -19,21 +19,24 @@ def pre_processing(file, val):
     if (val == 1):
         thresh = cv2.adaptiveThreshold(image,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY,11,2)
         thresh = inversion(thresh)
-    return image,thresh
+    return image_collor,thresh
 
-def processing(file):
-    image,thresh = pre_processing(file, 0)
+def processing(file,ver=0):
+    image,thresh = pre_processing(file, ver)
 
-    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (4, 4))
-    thresh = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, kernel, iterations=2)
+    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
+    thresh = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, kernel, iterations=1 )
 
     #thresh = cv2.erode(thresh, kernel, iterations=1)#тоньше
-    thresh = cv2.dilate(thresh, kernel, iterations=1)#тольще
+    #kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3)) #W,H
+    thresh = cv2.dilate(thresh, kernel, iterations=2)#тольще
+
     return contur(image,thresh)
     pass
 
 def contur(image,thresh):
     contours, hierarchy = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    #print_image(image)
     t = len(contours[:])
     area = 0
     for u in range(0, t):
@@ -55,10 +58,11 @@ def print_image(image,val=0):
     if (val == 1):
         imgplot = plt.imshow(image)
         plt.show()
-# Press the green button in the gutter to run the script.
+
+
 if __name__ == '__main__':
-    #file = './image/test.png'
-    file = '../image/1.jpg'
+    file = '../image/test.png'
+    #file = '../image/1.jpg'
 
     print((file))
     #print_image(image)
@@ -67,7 +71,7 @@ if __name__ == '__main__':
 
     print(f"area = {area}")
 
-    #print_image(image)
+    print_image(image)
 
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/

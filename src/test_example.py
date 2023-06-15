@@ -1,12 +1,14 @@
 import main
 
-def test_area_one():
+def test_area_GaussianBlur():
     file = 'test.png'
-    _, area = main.processing(file)
+    _, area = main.processing(file,0)
     #102900
-    assert area >= 102900 - (102900*0.1)
+    assert   10745.0 - (10745.0*0.01)<= area<= 10745.0 + (10745.0*0.01)
 
-def test_area_two():
+def test_area_adaptiveThreshold():
     file = 'test.png'
-    _, area = main.processing(file)
-    assert area <= 102900 + (102900*0.1)
+    _, area = main.processing(file,1)
+    #102900
+    assert   10745.0 - (10745.0*0.01)<= area<= 10745.0 + (10745.0*0.01)
+
