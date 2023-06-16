@@ -10,5 +10,7 @@ https://drive.google.com/file/d/1FGsIetp033dHL-sKbjtfW7XWkZrVNrED/view?usp=shari
 
 3) Запустить файл main.exe.
 
+4) Радоваться!
+
 ## Инструкция
 тут текст НУЖЕН!!!!!!!!!!!!!
