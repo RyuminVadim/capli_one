@@ -1,9 +1,6 @@
 import sys
 from PyQt5 import QtWidgets, uic
-from PyQt5.QtCore import pyqtSlot as slot
 from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-from PyQt5.QtWidgets import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QPixmap
 
@@ -16,7 +13,6 @@ class ExampleApp(QtWidgets.QMainWindow, Design):
     def __init__(self):
         super().__init__()
         self.setupUi(self)  # Этот метод из класса Design, он инициализирует виджеты
-        #self.file = None
         self.image = None
         self.image_gray = None
         self.thresh = None
@@ -116,7 +112,6 @@ class ExampleApp(QtWidgets.QMainWindow, Design):
         else:
             temp_imgSrc = QImage(image[:], image.shape[1], image.shape[0], QImage.Format_Grayscale8)
         pixmap = QPixmap.fromImage(temp_imgSrc).scaled(720, 720)
-        #pixmap = pixmap.scaled(720, 720)
         self.label.clear()
         self.label.setPixmap(pixmap)
 
@@ -148,10 +143,7 @@ if __name__ == '__main__':
 
     window = ExampleApp()  # Создаём объект класса ExampleApp
     window.show()  # Показываем окно
-    #app.exec_()  # и запускаем приложение
+
     sys.exit(app.exec_())
-
-
-
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
