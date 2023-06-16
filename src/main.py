@@ -31,20 +31,26 @@ class ExampleApp(QtWidgets.QMainWindow, Design):
         self.conturs_button.clicked.connect(self.conturs)
 
     def all_restart(self):
+        self.filter.setCurrentText("Gaussian Blur")
         self.pre_processing()
         self.noise_restarn()
         self.dilate_restarn()
+        self.conturs()
+
     def pre_processing(self):
         if(self.image_gray is None):
             return
         self.thresh = proc.pre_processing(self.image_gray,self.filter.currentText())
         self.print_image(self.thresh)
+
     def noise_restarn(self):
         self.noise_w.setValue(3)
         self.noise_h.setValue(3)
         self.noise_iter.setValue(1)
         self.noise_check.setChecked(False)
+        self.noise_check_false.setChecked(False)
         self.noise()
+
     def noise(self):
         if (self.thresh is None):
             self.pre_processing()
@@ -55,7 +61,10 @@ class ExampleApp(QtWidgets.QMainWindow, Design):
             thresh = self.thresh_n
 
         else: thresh = self.thresh
-        self.thresh_n = proc.noise(thresh,self.noise_w.value(),\
+        if self.noise_check_false.isChecked():
+            self.thresh_n = proc.noise(thresh,1,1,1)
+        else:
+            self.thresh_n = proc.noise(thresh,self.noise_w.value(),\
                                    self.noise_h.value(),self.noise_iter.value())
         self.print_image(self.thresh_n)
         self.thresh_d = None
@@ -63,9 +72,11 @@ class ExampleApp(QtWidgets.QMainWindow, Design):
     def dilate_restarn(self):
         self.dilate_w.setValue(3)
         self.dilate_h.setValue(3)
-        self.dilate_iter.setValue(1)
+        self.dilate_iter.setValue(2)
         self.dilate_check.setChecked(False)
+        self.dilate_check_false.setChecked(False)
         self.dilate()
+
     def dilate(self):
         if (self.thresh_n is None):
             self.noise()
@@ -76,7 +87,11 @@ class ExampleApp(QtWidgets.QMainWindow, Design):
             thresh = self.thresh_d
 
         else: thresh = self.thresh_n
-        self.thresh_d = proc.dilate(thresh,self.dilate_w.value(),\
+
+        if self.dilate_check_false.isChecked():
+            self.thresh_d = proc.dilate(thresh,1,1,1)
+        else:
+            self.thresh_d = proc.dilate(thresh,self.dilate_w.value(),\
                                    self.dilate_h.value(),self.dilate_iter.value())
         self.print_image(self.thresh_d)
 
@@ -92,6 +107,8 @@ class ExampleApp(QtWidgets.QMainWindow, Design):
         self.thresh = None
         self.thresh_n = None
         self.thresh_d = None
+        self.area.setText("нет контура")
+        self.conturs()
 
     def print_image(self, image):
         if (len(image.shape) ==3 ):
@@ -120,11 +137,9 @@ class ExampleApp(QtWidgets.QMainWindow, Design):
         thresh = self.thresh_d
         image,area = proc.contur(self.image.copy(),thresh)
         self.print_image(image)
-        print(area)
         area = 2.54 * (area/self.dpi.value())
         self.area.setText(str(area))
         pass
-
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)  # Новый экземпляр QApplication
@@ -133,7 +148,8 @@ if __name__ == '__main__':
 
     window = ExampleApp()  # Создаём объект класса ExampleApp
     window.show()  # Показываем окно
-    app.exec_()  # и запускаем приложение
+    #app.exec_()  # и запускаем приложение
+    sys.exit(app.exec_())
 
 
 
