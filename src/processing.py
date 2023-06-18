@@ -3,14 +3,20 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def load_image(file):
+    """Загрузки изображения."""
     image_collor = cv2.imread(file, 1)
     image = cv2.imread(file, 0)
     return image_collor,image
 
 def inversion(thresh):
+    """Инверсии значений в маске."""
     return cv2.bitwise_not(thresh)
 
 def pre_processing(image, val="Gaussian Blur"):
+    """
+    Создание порогового изображения.
+    Применяется адаптивный порог или разница между двумя размытиями по Гауссу с разным ядром.
+    """
     if(val == "Gaussian Blur"):
         x, y = image.shape
         median = cv2.GaussianBlur(image, (11, 11), 0)
@@ -25,16 +31,18 @@ def pre_processing(image, val="Gaussian Blur"):
     return thresh
 
 def noise(thresh,w,h,iter):
+    """Удаления шума."""
     kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (w, h))
     return cv2.morphologyEx(thresh, cv2.MORPH_OPEN, kernel, iterations=iter)#удаление шума
 
 def dilate(thresh,w,h,iter):
+    """Увеличение площади обьектов."""
     kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (w, h))
     return  cv2.dilate(thresh, kernel, iterations=iter)#тольще
 
 def contur(image,thresh):
+    """Создание контура по маске, наложение его на изображение и подсчёт общей площади всех выделенных обьектов."""
     contours, hierarchy = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    #print_image(image)
     t = len(contours[:])
     area = 0
     for u in range(0, t):
@@ -50,6 +58,7 @@ def contur(image,thresh):
     return image,area
 
 def print_image(image,val=0):
+    """Вывод изображения в отдельном окне. """
     if(val == 0):
         cv2.imshow('image', image)
         cv2.waitKey(0)
