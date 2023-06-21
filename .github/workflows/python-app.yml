@@ -36,8 +36,6 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Copy image to test
       run: cp image/test.png ${{ github.workspace }}/test.png
-    - name: Copy image to test_oval
-      run: cp image/test_oval.png ${{ github.workspace }}/test_oval.png
     - name: Copy image to test_null
       run: cp image/test_null.png ${{ github.workspace }}/test_null.png
 
