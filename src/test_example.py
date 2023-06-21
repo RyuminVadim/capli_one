@@ -18,3 +18,39 @@ def test_area_adaptiveThreshold():
     _, area = proc.contur(image, thresh)
     assert 10745.0 - (10745.0 * 0.1) <= area <= 10745.0 + (10745.0 * 0.1)
 
+def test_oval_area_GaussianBlur():
+    file = 'test_oval.png'
+    image,gray =proc.load_image(file)
+    thresh =proc.pre_processing(gray,"Gaussian Blur")
+    thresh = proc.noise(thresh,3,3,1)
+    thresh = proc.dilate(thresh,3,3,2)
+    _,area = proc.contur(image,thresh)
+    assert   9300.0 - (9300.0*0.1)<= area<= 9300.0 + (9300.0*0.1)
+
+def test_oval_area_adaptiveThreshold():
+    file = 'test_oval.png'
+    image, gray = proc.load_image(file)
+    thresh = proc.pre_processing(gray, "Adaptive Threshold")
+    thresh = proc.noise(thresh, 3, 3, 1)
+    thresh = proc.dilate(thresh, 3, 3, 2)
+    _, area = proc.contur(image, thresh)
+    assert 9300.0 - (9300.0 * 0.1) <= area <= 9300.0 + (9300.0 * 0.1)
+
+def test_null_area_GaussianBlur():
+    file = 'test_null.png'
+    image,gray =proc.load_image(file)
+    thresh =proc.pre_processing(gray,"Gaussian Blur")
+    thresh = proc.noise(thresh,3,3,1)
+    thresh = proc.dilate(thresh,3,3,2)
+    _,area = proc.contur(image,thresh)
+    assert    area== 0
+
+def test_null_area_adaptiveThreshold():
+    file = 'test_null.png'
+    image, gray = proc.load_image(file)
+    thresh = proc.pre_processing(gray, "Adaptive Threshold")
+    thresh = proc.noise(thresh, 3, 3, 1)
+    thresh = proc.dilate(thresh, 3, 3, 2)
+    _, area = proc.contur(image, thresh)
+    assert area == 0
+
