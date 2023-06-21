@@ -97,8 +97,7 @@ class ExampleApp(QtWidgets.QMainWindow, Design):
         self.print_image(self.thresh_d)
 
     def open_file(self):
-        dirlist = QFileDialog.getOpenFileName(self,"Выбрать файл",".")
-        file = dirlist[0]
+        file, _ = QFileDialog.getOpenFileName(self, "Select File", "", "Images (*.png *.jpg)")
         if (file == ""):
             self.menu_2.setTitle("Файл не выбран")
             return
@@ -117,7 +116,6 @@ class ExampleApp(QtWidgets.QMainWindow, Design):
         else:
             temp_imgSrc = QImage(image[:], image.shape[1], image.shape[0], QImage.Format_Grayscale8)
         pixmap = QPixmap.fromImage(temp_imgSrc).scaled(720, 720)
-        #pixmap = pixmap.scaled(720, 720)
         self.label.clear()
         self.label.setPixmap(pixmap)
 

@@ -52,7 +52,7 @@ def contur(image,thresh):
             majoraxis_length = max(axes)
             minoraxis_length = min(axes)
             eccentricity = (np.sqrt(1 - (minoraxis_length / majoraxis_length) ** 2))
-            if (eccentricity < 0.75):
+            if (eccentricity < 0.76):
                 area += cv2.contourArea(contours[u])
                 cv2.drawContours(image, contours, u, (255, 1, 255), 3)
     return image,area
