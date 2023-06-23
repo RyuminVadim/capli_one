@@ -114,10 +114,12 @@ class ExampleApp(QtWidgets.QMainWindow, Design):
         if (len(image.shape) ==3 ):
             temp_imgSrc = QImage(image[:], image.shape[1], image.shape[0], image.shape[1] * 3, QImage.Format_RGB888)
         else:
-            temp_imgSrc = QImage(image[:], image.shape[1], image.shape[0], QImage.Format_Grayscale8)
-        pixmap = QPixmap.fromImage(temp_imgSrc).scaled(720, 720)
+            temp_imgSrc = QImage(image[:], image.shape[1], image.shape[0],image.shape[1], QImage.Format_Grayscale8)
+        pixmap = QPixmap.fromImage(temp_imgSrc)
+        pixmap = pixmap.scaled(720, 720,Qt.AspectRatioMode.KeepAspectRatio)
         self.label.clear()
         self.label.setPixmap(pixmap)
+        #self.label.setScaledContents(True)
 
     def conturs(self):
         if self.image is None:
