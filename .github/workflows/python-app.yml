@@ -35,7 +35,7 @@ jobs:
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
       - name: Run PyInstaller
         run: |
-          python -m PyInstaller -w --onefile src/main.py --name "kapli"
+          python -m PyInstaller -w --onefile src/main.py --name "capli"
       - name: Create release
         id: create_release
         uses: actions/create-release@v1
@@ -55,8 +55,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.AAA }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: "dist/kapli.exe"
-          asset_name: "kapli.exe"
+          asset_path: "dist/capli.exe"
+          asset_name: "capli.exe"
           asset_content_type: application/octet-stream
 
   test:
