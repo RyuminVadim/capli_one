@@ -35,7 +35,7 @@ jobs:
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
       - name: Run PyInstaller
         run: |
-          python -m PyInstaller -w --onefile src/main.py --name "capli"
+          python -m PyInstaller -w --onefile src/main.py --name "kapli"
       - name: Create release
         id: create_release
         uses: actions/create-release@v1
