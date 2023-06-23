@@ -59,7 +59,7 @@ jobs:
           asset_name: "kapli.exe"
           asset_content_type: application/octet-stream
 
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -94,11 +94,3 @@ jobs:
         with:
           name: coverage-report
           path: htmlcov/
-      - name: Создание релиза
-        uses: actions/create-release@v1
-        with:
-          token: ${{ secrets.TOKEN }}
-          tag_name: v1.0.0 
-          release_name: Release v1.0.${{ github.run_number }}
-          draft: false
-          prerelease: false
