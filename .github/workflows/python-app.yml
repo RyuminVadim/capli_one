@@ -40,7 +40,7 @@ jobs:
         pytest --cov=./
     - name: Generate coverage report
       run: |
-        coverage html
+        coverage html --source src
     - name: Upload coverage report
       uses: actions/upload-artifact@v2
       with:
