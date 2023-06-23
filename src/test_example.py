@@ -35,4 +35,3 @@ def test_null_area_adaptiveThreshold():
     thresh = proc.dilate(thresh, 3, 3, 2)
     _, area = proc.contur(image, thresh)
     assert area == 0
-
