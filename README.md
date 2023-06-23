@@ -4,7 +4,7 @@
 
 ## Установка
 1) Чтобы установить данную программу, необходимо скачать архив по ссылке:
-https://drive.google.com/file/d/1FGsIetp033dHL-sKbjtfW7XWkZrVNrED/view?usp=sharing
+[https://drive.google.com/file/d/1FGsIetp033dHL-sKbjtfW7XWkZrVNrED/view?usp=sharing](https://drive.google.com/file/d/1NEB99CXMuhq-E1_fiR4IE6jcYMUfDpRB/view?usp=sharing)
 
 2) Разархивировать скачанный архив.
 
