@@ -51,9 +51,9 @@ jobs:
     - name: Создание релиза
       uses: actions/create-release@v1
       with:
-        GITHUB_TOKEN: ${{ secrets.TOKEN }}
-        tag_name: v1.0.0 # Укажите номер версии вашего релиза
-        release_name: Release v1.0.0 # Название релиза
+        token: ${{ secrets.TOKEN }}
+        tag_name: v1.0.0 
+        release_name: Release v1.0.${{ github.run_number }}
         draft: false
         prerelease: false
   
