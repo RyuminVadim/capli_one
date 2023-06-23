@@ -65,13 +65,3 @@ def print_image(image,val=0):
     if (val == 1):
         imgplot = plt.imshow(image)
         plt.show()
-
-
-if __name__ == "__main__":
-    image_color, image = load_image("../image/1.jpg")
-    thresh = pre_processing(image, val="Gaussian Blur")
-    thresh = noise(thresh, w=3, h=3, iter=1)
-    thresh = dilate(thresh, w=5, h=5, iter=1)
-    result_image, area = contur(image_color, thresh)
-
-    print("Area:", area)
