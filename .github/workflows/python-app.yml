@@ -51,7 +51,7 @@ jobs:
     - name: Создание релиза
       uses: actions/create-release@v1
       env:
-        GITHUB_TOKEN: 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
+        GITHUB_TOKEN: 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
       with:
         tag_name: v1.0.0 # Укажите номер версии вашего релиза
         release_name: Release v1.0.0 # Название релиза
