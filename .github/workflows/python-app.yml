@@ -24,7 +24,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install flake8 pytest pytest-cov PySide2
-        pip install qtbase5-dev qtdeclarative5-dev qtmultimedia5-dev
+        sudo apt-get install qtbase5-dev qtdeclarative5-dev qtmultimedia5-dev
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Lint with flake8
       run: |
