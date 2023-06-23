@@ -23,7 +23,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install flake8 pytest coverage
+        pip install flake8 pytest pytest-cov
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Lint with flake8
       run: |
@@ -37,7 +37,7 @@ jobs:
       run: cp image/test_null.png ${{ github.workspace }}/test_null.png
     - name: Test with pytest and generate coverage report
       run: |
-        pytest --cov=.
+        pytest --cov=./
     - name: Generate coverage report
       run: |
         coverage html
