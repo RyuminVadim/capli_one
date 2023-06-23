@@ -37,12 +37,6 @@ jobs:
     - name: Copy image to test_null
       run: cp image/test_null.png ${{ github.workspace }}/test_null.png
       
-    - name: Сборка проекта
-      run: |
-        qmake -project
-        qmake
-        make  
-      
     - name: Test with pytest and generate coverage report
       run: |
         pytest --cov=./
