@@ -35,10 +35,6 @@ jobs:
       run: cp image/test.png ${{ github.workspace }}/test.png
     - name: Copy image to test_null
       run: cp image/test_null.png ${{ github.workspace }}/test_null.png
-    - name: Сборка приложения
-      run: |
-        cd src
-        python main.py 
     - name: Test with pytest and generate coverage report
       run: |
         pytest --cov=./
