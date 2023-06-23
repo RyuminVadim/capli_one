@@ -50,9 +50,8 @@ jobs:
         path: htmlcov/
     - name: Создание релиза
       uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.TOKEN}}
       with:
+        GITHUB_TOKEN: ${{ secrets.TOKEN}}
         tag_name: v1.0.0 # Укажите номер версии вашего релиза
         release_name: Release v1.0.0 # Название релиза
         draft: false
